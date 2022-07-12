@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Climate App | John</title>
+      <link rel="icon" href="https://img1.freepng.es/20180530/fut/kisspng-iphone-4s-ios-7-computer-icons-weather-weather-logo-5b0ed83a19f755.5685377715276995141064.jpg">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  </head>
+  <body>
+  <div class="w-100 vh-100 bg-light overflow-hidden">
+    <div class="row">
+        <!--Sidebar-->
+        <div class="col-1 vh-100 shadow-sm">
+            <div class="row h-25 text-center py-5">
+                <a href="#" class="text-primary fs-2"><i class="bi bi-stack"></i></a>
+            </div>
+            <div class="row text-center h-50">
+                <a href="#" class="text-primary fs-2"><i class="bi bi-bar-chart-fill"></i></a>
+                <a href="#" class="text-muted fs-2"><i class="bi bi-cart"></i></a>
+                <a href="#" class="text-muted fs-2"><i class="bi bi-file-bar-graph-fill"></i></a>
+                <a href="#" class="text-muted fs-2"><i class="bi bi-gear-fill"></i></a>
+            </div>
+            <div class="row text-center border-top border-muted pt-5 h-25">
+                <a href="#" class="text-muted fs-2"><i class="bi bi-exclamation-square-fill"></i></a>
+            </div>
+        </div>
+        <div class="col-11 vh-100">
+            <!--Header-->
+          <div class="row shadow-sm px-5" style="height:10vh">
+              <!--Search section-->
+              <div class="col-md-6 d-flex align-items-center">
+                  <form class="d-flex" action="{% url 'search'%}" method="post">
+                      {% csrf_token %}
+                      <input type="text" name="city" id="city" class="form-control w-100" placeholder="Enter the city">
+                      <button class="btn btn-primary ms-2 px-4">Search</button>
+                  </form>
+              </div><!--Profile-->
+              <div class="col-md-6 d-flex px-1 align-items-center justify-content-end">
+                <p class="text-muted"><span class="me-2 text-primary fs-4"><i class="bi bi-chat"></i></span> John Gualteros <span><i class="bi bi-person-circle"></i></span></p>
+              </div>
+          </div>
+
+            <div class="row p-5" style="height:90vh">
+                <div class="col-md-8">
+                    {% if city %}
+                    <div class="card card-body rounded-md shadow-sm">
+                        <h1 class="text-center fw-bold display-3 text-capitalize">{{ city }}</h1>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2>Temperature: <span class="text-muted">{{ temperature }}</span></h2>
+                                <h2>Wind Speed: <span class="text-muted">{{ wind_speed }}</span></h2>
+                                <h2>Longitude: <span class="text-muted">{{ longitude }}</span></h2>
+                                <h2>Latitude: <span class="text-muted">{{ latitude }}</span></h2>
+                                <h2>Description: <span class="text-muted">{{ description }}</span></h2>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                                <h1 class="text-primary" style="font-size:8rem;"><i class="bi bi-hand-thumbs-up"></i></h1>
+                            </div>
+                        </div>
+                    </div>
+                        {% else %}
+                        <h1>Search Your City</h1>
+                    {% endif %}
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-body bg-primary text-light rounded-lg shadow-lg h-100 text-center d-flex align-items-center justify-content-center">
+                        <img src={{ profile.avatar_url }} alt="{{ profile.name }}" width="200" class="rounded-circle">
+                        <h5 class="mt-2">Hi 👋 I am the developer who made this application my github profile</h5>
+                        <h3 class="fw-bold mt-2">{{ profile.name }}</h3>
+                        <p>{{ profile.location }}</p>
+                        <p class="fw-bold fs-5">{{ profile.bio }}</p>
+                        <a href={{ profile.html_url }} target="_blank" class="btn btn-light text-primary fw-bold w-100 rounded-md shadow-md">Visit My Github</a>
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>
