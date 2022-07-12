@@ -15,7 +15,7 @@ def search(request):
     # shot the value for find the climate
     _city = request.POST['city']
 
-    url_weather = "https://api.openweathermap.org/data/2.5/weather?q={}&appid=3185a5e3271f50859b92ecd87272c922&units=metric".format(_city)
+    url_weather = "".format(_city)
 
     response_weather = requests.get(url_weather)
     data_weather = response_weather.json()
